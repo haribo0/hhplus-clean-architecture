@@ -1,0 +1,29 @@
+spring:
+  hikari:
+    maximum-pool-size: 30
+  output:
+    ansi:
+      enabled: always #로그 색상추가
+  datasource:
+    url: jdbc:h2:mem:testdb
+#    url: jdbc:h2:mem:testdb;MODE=MYSQL;DB_CLOSE_DELAY=-1;LOCK_MODE=0
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+#      ddl-auto: create-drop
+      show_sql: true #sql 문이 보이도록
+      format_sql: true  #sql 계층식 표현
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+logging:
+#  level:
+#    org.hibernate.SQL: DEBUG
+#    org.hibernate.type.descriptor.sql.BasicBinder: TRACE

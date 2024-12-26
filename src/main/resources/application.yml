@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: hhplus-architecture
+  profiles:
+    active: local # 기본적으로 로컬 환경 활성화
+  datasource:
+    url: jdbc:mysql://localhost:3306/hhplus_lecture?useSSL=false&serverTimezone=Asia/Seoul
+    username: root
+    password: test1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  sql:
+    init:
+      mode: always # SQL 초기화 모드
