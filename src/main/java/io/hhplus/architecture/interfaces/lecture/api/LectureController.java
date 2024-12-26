@@ -1,5 +1,7 @@
 package io.hhplus.architecture.interfaces.lecture.api;
 
+import io.hhplus.architecture.application.enrollment.EnrollmentService;
+import io.hhplus.architecture.application.lecture.LectureService;
 import io.hhplus.architecture.domain.lecture.Lecture;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import java.util.List;
 public class LectureController {
 
     private final LectureService lectureService;
+    private final EnrollmentService enrollmentService;
 
 
     /**
@@ -27,5 +30,22 @@ public class LectureController {
         List<Lecture> lectures = lectureService.getLecturesByDate(date);
         return ResponseEntity.ok(lectures);
     }
+
+    /**
+     * 강의 신청 API
+     * @param lectureId 강의 ID
+     * @param userId 사용자 ID
+     * @return 신청 성공 여부 메시지
+     */
+    @PostMapping("/{lectureId}/enroll")
+    public ResponseEntity<String> enrollLecture(@PathVariable Long lectureId, @RequestParam Long userId) {
+        try {
+            enrollmentService.enrollUser(userId, lectureId);
+            return ResponseEntity.ok("수강신청이 완료되었습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 
 }
