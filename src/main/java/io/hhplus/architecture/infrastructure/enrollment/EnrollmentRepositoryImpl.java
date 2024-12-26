@@ -36,5 +36,10 @@ public class EnrollmentRepositoryImpl implements EnrollmentRepository {
         return enrollmentJpaRepository.findByLectureIdAndUserId(lectureId,userId);
     }
 
+    @Override
+    public List<Enrollment> findByUserId(Long userId) {
+        return enrollmentJpaRepository.findByUserId(userId);
+    }
+
 
 }

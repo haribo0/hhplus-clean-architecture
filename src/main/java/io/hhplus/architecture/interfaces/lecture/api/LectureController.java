@@ -47,5 +47,15 @@ public class LectureController {
         }
     }
 
+    /**
+     * 신청 완료된 강의 목록 조회 API
+     * @param userId 사용자 ID
+     * @return 신청 완료된 강의 목록
+     */
+    @GetMapping("/enrolled")
+    public ResponseEntity<List<Lecture>> getUserEnrolledLectures(@PathVariable Long userId) {
+        List<Lecture> lectures = lectureService.getUserEnrolledLectures(userId);
+        return ResponseEntity.ok(lectures);
+    }
 
 }
