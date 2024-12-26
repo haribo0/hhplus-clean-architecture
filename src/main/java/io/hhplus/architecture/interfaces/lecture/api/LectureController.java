@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -25,10 +26,12 @@ public class LectureController {
      * @param date 날짜
      * @return 신청 가능한 강의 목록
      */
-    @GetMapping("/")
-    public ResponseEntity<List<Lecture>> getAvailableLectures(LocalDate date) {
+    @GetMapping()
+    public ResponseEntity<List<LectureResponse>> getAvailableLectures(@RequestParam LocalDate date) {
         List<Lecture> lectures = lectureService.getLecturesByDate(date);
-        return ResponseEntity.ok(lectures);
+        return ResponseEntity.ok(lectures.stream()
+                .map(LectureResponse::fromEntity)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -53,9 +56,12 @@ public class LectureController {
      * @return 신청 완료된 강의 목록
      */
     @GetMapping("/enrolled")
-    public ResponseEntity<List<Lecture>> getUserEnrolledLectures(@PathVariable Long userId) {
+    public ResponseEntity<List<LectureResponse>> getUserEnrolledLectures(@RequestParam Long userId) {
         List<Lecture> lectures = lectureService.getUserEnrolledLectures(userId);
-        return ResponseEntity.ok(lectures);
+        return ResponseEntity.ok(
+                lectures.stream()
+                .map(LectureResponse::fromEntity)
+                .collect(Collectors.toList()));
     }
 
 }

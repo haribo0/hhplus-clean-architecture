@@ -1,6 +1,5 @@
 package io.hhplus.architecture.application.enrollment;
 
-import io.hhplus.architecture.application.enrollment.EnrollmentService;
 import io.hhplus.architecture.domain.lecture.Lecture;
 import io.hhplus.architecture.domain.user.User;
 import io.hhplus.architecture.domain.enrollment.EnrollmentRepository;
